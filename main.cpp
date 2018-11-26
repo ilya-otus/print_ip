@@ -9,6 +9,12 @@
 
 using Ip = std::vector<unsigned char>;
 
+template<typename T>
+inline constexpr bool is_integral_v = std::is_integral<T>::value;
+
+template<bool B, typename T>
+using enable_if_t = typename std::enable_if<B, T>::type;
+
 template <typename T>
 struct is_string {
     static const bool value = false;
@@ -41,7 +47,7 @@ template<typename T>
 inline constexpr bool is_container_v = is_container<T>::value;
 
 template<typename T>
-void printIp(std::enable_if_t<std::is_integral_v<T>, T> rawIp) {
+void printIp(enable_if_t<is_integral_v<T>, T> rawIp) {
     const size_t typeSize = sizeof(T);
     const int mask = 255;
     for(int i = typeSize - 1; i >= 0; --i) {
@@ -55,12 +61,12 @@ void printIp(std::enable_if_t<std::is_integral_v<T>, T> rawIp) {
 }
 
 template<typename T>
-void printIp(std::enable_if_t<is_string_v<T>, T> strIp) {
+void printIp(enable_if_t<is_string_v<T>, T> strIp) {
     std::cout << strIp << std::endl;
 }
 
 template<typename T>
-void printIp(std::enable_if_t<is_container_v<T>, T> cntIp) {
+void printIp(enable_if_t<is_container_v<T>, T> cntIp) {
     auto last = --cntIp.end();
     for(auto i = cntIp.begin(); i != cntIp.end(); ++i) {
         std::cout << *i;
