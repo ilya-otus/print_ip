@@ -82,7 +82,6 @@ int main(int argc, char *argv[])
     (void)argc;
     (void)argv;
 
-    using namespace std::string_literals;
     char ip1 = -1;
     printIp<char>(ip1);
     short ip2 = 0;
@@ -91,7 +90,7 @@ int main(int argc, char *argv[])
     printIp<int>(ip3);
     long ip4 = 8875824491850138409;
     printIp<long>(ip4);
-    std::string ip5 = "127.0.0.1"s;
+    auto ip5 = std::string("127.0.0.1");
     printIp<std::string>(ip5);
     auto ip6 = std::vector<int>{12,12,12,12};
     printIp<decltype(ip6)>(ip6);
