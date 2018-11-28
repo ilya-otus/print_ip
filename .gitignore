@@ -7,4 +7,5 @@
 !*.h.in
 !*.hpp
 !CMakeLists.txt
+!build/doc/html/*
 version.h
