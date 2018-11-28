@@ -1,11 +1,3 @@
-*
-!.gitignore
-!.travis.yml
-!README.md
-!*.cpp
-!*.h
-!*.h.in
-!*.hpp
-!CMakeLists.txt
-!build/doc/html/*
+build/
+!build/doc/html/
 version.h
