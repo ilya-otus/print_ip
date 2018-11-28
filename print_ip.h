@@ -75,7 +75,8 @@ static void print(T t) {
 };
 
 template<typename T, typename... Ts>
-typename std::enable_if<std::conjunction<std::is_same<T, Ts>...>::value>::type printIp(std::tuple<T, Ts...> tplIp) {
+void printIp(std::tuple<T, Ts...> tplIp) {
+    static_assert(std::conjunction<std::is_same<T, Ts>...>::value, "Types inside a tuple aren't equal!");
     PrintTuple<decltype(tplIp), std::tuple_size<decltype(tplIp)>::value>::print(tplIp);
     std::cout << std::endl;
 }
