@@ -11,12 +11,21 @@ env:
         - MINOR_VERSION=0
         - PACKAGE_FULL_VERSION=${MAJOR_VERSION}.${MINOR_VERSION}.${TRAVIS_BUILD_NUMBER}
         - PACKAGE_NAME=print_ip-${PACKAGE_FULL_VERSION}-Linux.deb
+script:
+    - cmake .
+    - cmake --build .
+    - cmake --build . --target doc
+    - cmake --build . --target package
+deploy:
+    provider: script
+    skip_cleanup: true
     script:
-        - cmake .
-        - cmake --build .
-        - cmake --build . --target package
-    deploy:
-        provider: script
-        skip_cleanup: true
-        script:
-            - curl -T ${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${TRAVIS_BUILD_NUMBER}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+        - curl -T ${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${TRAVIS_BUILD_NUMBER}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+deploy:
+    provider: pages
+    skip-cleanup: true
+    github-token: ${GITHUB_TOKEN}
+    keep-history: true
+    local-dir: doxygen
+    on:
+        branch: master
