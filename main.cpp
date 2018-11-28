@@ -19,8 +19,6 @@ int main(int argc, char *argv[])
     printIp<decltype(ip6)>(ip6);
     auto ip7 = std::list<int>{13, 13, 13, 13};
     printIp<decltype(ip7)>(ip7);
-    std::tuple<int, int, int, int> ip8{14, 14, 14, 14};
-    printIp(ip8);
-    printIp(std::make_tuple(-1,15,15,15,11112143145));
+    printIp(std::make_tuple(-1,15,15,15,1112143145));
     return 0;
 }

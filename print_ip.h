@@ -5,6 +5,15 @@
 #include <tuple>
 #include <type_traits>
 
+template<typename...>
+struct conjunction : std::true_type {};
+
+template<typename B1>
+struct conjunction<B1> : B1 {};
+
+template<typename B1, typename... Bn>
+struct conjunction<B1, Bn...> : std::conditional_t<bool(B1::value), conjunction<Bn...>, B1> {};
+
 template<typename T>
 struct is_container {
     static const bool value = false;
@@ -76,7 +85,7 @@ static void print(T t) {
 
 template<typename T, typename... Ts>
 void printIp(std::tuple<T, Ts...> tplIp) {
-    static_assert(std::conjunction<std::is_same<T, Ts>...>::value, "Types inside a tuple aren't equal!");
+    static_assert(conjunction<std::is_same<T, Ts>...>::value, "Types inside a tuple aren't equal!");
     PrintTuple<decltype(tplIp), std::tuple_size<decltype(tplIp)>::value>::print(tplIp);
     std::cout << std::endl;
 }
