@@ -14,6 +14,7 @@ env:
 script:
     - cmake .
     - cmake --build .
+    - echo "*\n!doc/html/*" > .gitignore
     - cmake --build . --target doc
     - cmake --build . --target package
 deploy:
