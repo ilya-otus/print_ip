@@ -5,11 +5,8 @@ before_script:
     - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list.d/xenial.list
     - sudo apt-get update
     - sudo apt-get install libspdlog-dev -y
-addons:
-    apt:
-        packages:
-            - graphviz
-            - doxygen
+    - sudo apt-get install graphviz doxygen -y
+    - sudo ldconfig
 env:
     global:
         - MAJOR_VERSION=0
