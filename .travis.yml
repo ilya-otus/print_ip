@@ -22,7 +22,7 @@ deploy:
     skip_cleanup: true
     script:
         - curl -T ${PACKAGE_NAME} -u${USER}:${BINTRAY_API_KEY} "https://api.bintray.com/content/${USER}/${REPO_PATH}/${TRAVIS_BUILD_NUMBER}/${PACKAGE_NAME};deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
-deploy:
+deploy_doc:
     provider: pages
     skip-cleanup: true
     github-token: ${GITHUB_TOKEN}
