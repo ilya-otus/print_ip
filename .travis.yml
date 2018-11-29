@@ -1,5 +1,5 @@
 language: cpp
-compiler: gcc
+compiler: clang
 before_script:
     - sudo apt-get install libboost-test-dev -y
     - sudo apt-get install graphviz doxygen -y
